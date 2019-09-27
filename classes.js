@@ -64,9 +64,9 @@ const newEmployee = new Employee(
 
 //Code Here
 class Manager extends Employee {
-	constructor(first_name, last_name, email, age, reports) {
+	constructor(first_name, last_name, email, age, reports = []) {
 		super(first_name, last_name, email, age);
-		this.reports = [];
+		this.reports = reports;
 	}
 
 	hire(employee) {
@@ -77,13 +77,7 @@ class Manager extends Employee {
 	}
 }
 
-const newManager = new Manager(
-	"Charlie",
-	"Campbell",
-	"charlie@gmail.com",
-	30,
-	[]
-);
+const newManager = new Manager("Charlie", "Campbell", "charlie@gmail.com", 30);
 
 ////////// PROBLEM 3 //////////
 
@@ -175,3 +169,23 @@ const newProManager = new ProgressiveManager(
 */
 
 //Code Here
+class Machine {
+	constructor(widgets_made_count, wear_and_tear_count, needs_reboot) {
+		(this.widgets_made_count = 0),
+			(this.wear_and_tear_count = 0),
+			(this.needs_reboot = false);
+	}
+	makeWidgets = function(num) {
+		this.widgets_made_count += num;
+		this.wear_and_tear_count += Math.floor(num / 50);
+	};
+	fixMachine = function() {
+		this.needs_reboot = true;
+	};
+	reboot = function() {
+		return function() {
+			this.wear_and_tear_count -= 10;
+			this.needs_reboot = false;
+		}.bind(this);
+	};
+}
